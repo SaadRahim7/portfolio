@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Saad Rahim — Full Stack Developer (Flutter & Laravel). A futuristic, motion-driven portfolio." />
+  <title>Saad Rahim — Full Stack Developer</title>
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== LOADING SPLASH ===== -->
+  <div class="splash" id="splash">
+    <div class="splash__inner">
+      <div class="splash__name">SAAD RAHIM</div>
+      <div class="splash__meta">
+        <span>Full Stack Developer</span>
+        <span class="splash__count" id="splashCount">000</span>
+      </div>
+      <div class="splash__bar"><i id="splashFill"></i></div>
+    </div>
+  </div>
+
+  <!-- floating project preview (desktop hover) -->
+  <div class="work-preview" id="workPreview" aria-hidden="true"></div>
+
+  <!-- futuristic system layers -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="scanline" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#top" class="nav__logo" data-cursor aria-label="Saad Rahim — home">SR<span class="dot" aria-hidden="true">.</span></a>
+      <nav class="nav__links" id="navLinks">
+        <a href="#index" class="nav__link" data-cursor>Work</a>
+        <a href="#skills" class="nav__link" data-cursor>Skills</a>
+        <a href="#path" class="nav__link" data-cursor>Path</a>
+        <a href="#contact" class="nav__link" data-cursor>Contact</a>
+      </nav>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" data-cursor>
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="top">
+    <div class="hero__depth" data-parallax-root aria-hidden="true">
+      <div class="ghost ghost--1" data-depth="0.06">FULL—STACK</div>
+      <div class="ghost ghost--2" data-depth="0.12">DEVELOPER</div>
+      <div class="layer layer--grid" data-depth="0.03"></div>
+      <div class="layer layer--halo" data-depth="0.02"></div>
+    </div>
+
+    <div class="container hero__content">
+      <p class="hero__status" data-hero><span class="live"></span> Available for work — 2026</p>
+
+      <h1 class="hero__title" data-split aria-label="Saad Rahim">Saad Rahim</h1>
+
+      <div class="hero__meta" data-hero>
+        <span>Full Stack Developer</span>
+        <span class="sep">/</span>
+        <span>Flutter &amp; Laravel</span>
+      </div>
+
+      <p class="hero__tagline" data-hero>
+        Building clean, scalable, and high-performance digital products.
+      </p>
+
+      <div class="hero__actions" data-hero>
+        <a href="#index" class="btn btn--solid" data-magnetic data-cursor>View Work</a>
+        <a href="#contact" class="btn btn--ghost" data-magnetic data-cursor>Contact Me</a>
+      </div>
+    </div>
+
+    <a href="#intro" class="scroll-cue" aria-label="Scroll" data-hero data-cursor>
+      <span class="scroll-cue__line"></span>
+      <span class="scroll-cue__txt">Scroll</span>
+    </a>
+  </section>
+
+  <!-- ===== INTRO (word-reveal narrative) ===== -->
+  <section class="intro" id="intro">
+    <div class="container intro__grid">
+      <div class="intro__text">
+        <p class="intro__label reveal">[ 00 — Profile ]</p>
+        <p class="intro__statement" data-words>
+          I design and engineer digital products — mobile apps, web systems, and scalable
+          backend APIs — with three years of focus on motion, clarity, and performance
+          across thirty-plus shipped projects.
+        </p>
+      </div>
+
+      <figure class="intro__photo reveal">
+        <img src="saadrahim.png" alt="Saad Rahim — portrait" loading="lazy" decoding="async" />
+        <!-- <figcaption>Fig. 01 — Saad Rahim</figcaption> -->
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== continuous motion strip ===== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__inner" id="marquee">
+      <span>Flutter</span><span>•</span><span>Laravel</span><span>•</span><span>Firebase</span><span>•</span><span>REST APIs</span><span>•</span><span>MySQL</span><span>•</span><span>Supabase</span><span>•</span><span>Dart</span><span>•</span><span>PHP</span><span>•</span><span>Git</span><span>•</span>
+      <span>Flutter</span><span>•</span><span>Laravel</span><span>•</span><span>Firebase</span><span>•</span><span>REST APIs</span><span>•</span><span>MySQL</span><span>•</span><span>Supabase</span><span>•</span><span>Dart</span><span>•</span><span>PHP</span><span>•</span><span>Git</span><span>•</span>
+    </div>
+  </div>
+
+  <!-- ===== INDEX / PROJECTS (expandable, no cards) ===== -->
+  <section class="index" id="index">
+    <div class="container">
+      <p class="sec-label reveal">[ 01 — Selected Work ]</p>
+
+      <ul class="idx-list">
+        <li class="idx reveal" data-project data-img="pharmacy.svg">
+          <button class="idx__bar" aria-expanded="false" data-cursor>
+            <span class="idx__no">01</span>
+            <span class="idx__title">Pharmacy App</span>
+            <span class="idx__cue" aria-hidden="true"></span>
+          </button>
+          <div class="idx__panel">
+            <div class="idx__panelInner">
+              <p class="idx__desc">Medicine ordering and home-delivery system with real-time tracking and a Laravel-driven backend.</p>
+              <div class="idx__tech"><span>Flutter</span><span>Laravel</span><span>Firebase</span></div>
+              <a class="idx__link" href="https://example.com" target="_blank" rel="noopener" data-cursor>Live Demo <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </li>
+
+        <li class="idx reveal" data-project data-img="airport.svg">
+          <button class="idx__bar" aria-expanded="false" data-cursor>
+            <span class="idx__no">02</span>
+            <span class="idx__title">Airport Taxi System</span>
+            <span class="idx__cue" aria-hidden="true"></span>
+          </button>
+          <div class="idx__panel">
+            <div class="idx__panelInner">
+              <p class="idx__desc">Ride-booking platform with live maps and an automated driver-assignment engine.</p>
+              <div class="idx__tech"><span>Flutter</span><span>PHP</span><span>MySQL</span></div>
+              <a class="idx__link" href="https://example.com" target="_blank" rel="noopener" data-cursor>Live Demo <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </li>
+
+        <li class="idx reveal" data-project data-img="zaftron.svg">
+          <button class="idx__bar" aria-expanded="false" data-cursor>
+            <span class="idx__no">03</span>
+            <span class="idx__title">Zaftron App</span>
+            <span class="idx__cue" aria-hidden="true"></span>
+          </button>
+          <div class="idx__panel">
+            <div class="idx__panelInner">
+              <p class="idx__desc">Yarn marketplace featuring camera-based color detection and a sample-ordering flow.</p>
+              <div class="idx__tech"><span>Flutter</span><span>Laravel</span></div>
+              <a class="idx__link" href="https://example.com" target="_blank" rel="noopener" data-cursor>Live Demo <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </li>
+
+        <li class="idx reveal" data-project data-img="social.svg">
+          <button class="idx__bar" aria-expanded="false" data-cursor>
+            <span class="idx__no">04</span>
+            <span class="idx__title">Social Media App</span>
+            <span class="idx__cue" aria-hidden="true"></span>
+          </button>
+          <div class="idx__panel">
+            <div class="idx__panelInner">
+              <p class="idx__desc">Modern social platform with posts, stories, real-time chat and notifications.</p>
+              <div class="idx__tech"><span>Flutter</span><span>Firebase</span></div>
+              <a class="idx__link" href="https://example.com" target="_blank" rel="noopener" data-cursor>Live Demo <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== SKILLS (kinetic floating text) ===== -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <p class="sec-label reveal">[ 02 — Capabilities ]</p>
+    </div>
+    <div class="field" id="skillField" aria-label="Skills">
+      <span class="kw" data-kw>Flutter</span>
+      <span class="kw" data-kw>Dart</span>
+      <span class="kw" data-kw>Laravel</span>
+      <span class="kw" data-kw>PHP</span>
+      <span class="kw" data-kw>Firebase</span>
+      <span class="kw" data-kw>MySQL</span>
+      <span class="kw" data-kw>REST APIs</span>
+      <span class="kw" data-kw>Git</span>
+      <span class="kw" data-kw>Supabase</span>
+      <span class="kw" data-kw>Swift</span>
+      <span class="kw" data-kw>SwiftUI</span>
+      <span class="kw" data-kw>React Native</span>
+      <span class="kw" data-kw>Android</span>
+    </div>
+  </section>
+
+  <!-- ===== PATH / EXPERIENCE (flowing motion path) ===== -->
+  <section class="path" id="path">
+    <div class="container">
+      <p class="sec-label reveal">[ 03 — Trajectory ]</p>
+
+      <div class="flow" id="flow">
+        <svg class="flow__svg" id="flowSvg" preserveAspectRatio="none" aria-hidden="true">
+          <path id="flowPath" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="1.5"></path>
+          <path id="flowDraw" fill="none" stroke="#ffffff" stroke-width="1.5"></path>
+        </svg>
+
+        <div class="flow__items" id="flowItems">
+          <article class="flow__item reveal">
+            <span class="flow__node" aria-hidden="true"></span>
+            <span class="flow__yr">01</span>
+            <h3 class="flow__role">Mobile App Developer</h3>
+            <p class="flow__line">Cross-platform Flutter apps with clean, scalable architecture.</p>
+          </article>
+          <article class="flow__item reveal">
+            <span class="flow__node" aria-hidden="true"></span>
+            <span class="flow__yr">02</span>
+            <h3 class="flow__role">Full Stack Developer</h3>
+            <p class="flow__line">End-to-end products with Laravel backends and Flutter frontends.</p>
+          </article>
+          <article class="flow__item reveal">
+            <span class="flow__node" aria-hidden="true"></span>
+            <span class="flow__yr">03</span>
+            <h3 class="flow__role">Freelance Developer</h3>
+            <p class="flow__line">Production-ready systems delivered for international clients.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <p class="sec-label reveal">[ 04 — Contact ]</p>
+
+      <div class="contact__grid">
+        <div class="contact__left">
+          <h2 class="contact__title" data-words>Let's build something meaningful together.</h2>
+          <ul class="contact__list reveal">
+            <li><a href="mailto:saad@example.com" data-magnetic data-cursor><span>Email</span> saad@example.com</a></li>
+            <li><a href="https://wa.me/0000000000" target="_blank" rel="noopener" data-magnetic data-cursor><span>WhatsApp</span> +00 000 0000000</a></li>
+            <li><a href="https://github.com" target="_blank" rel="noopener" data-magnetic data-cursor><span>GitHub</span> /saadrahim</a></li>
+            <li><a href="https://linkedin.com" target="_blank" rel="noopener" data-magnetic data-cursor><span>LinkedIn</span> /in/saadrahim</a></li>
+          </ul>
+        </div>
+
+        <form class="contact__form reveal" id="contactForm" method="POST"
+              action="https://formsubmit.co/ajax/saadrahim.201@gmail.com" novalidate>
+          <!-- FormSubmit options -->
+          <input type="hidden" name="_subject" value="New message from portfolio site" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <!-- honeypot: bots fill this, humans don't -->
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0" />
+
+          <div class="field-line">
+            <input type="text" id="name" name="name" placeholder=" " required data-cursor />
+            <label for="name">Name</label>
+            <small class="error" data-for="name"></small>
+          </div>
+          <div class="field-line">
+            <input type="email" id="email" name="email" placeholder=" " required data-cursor />
+            <label for="email">Email</label>
+            <small class="error" data-for="email"></small>
+          </div>
+          <div class="field-line">
+            <textarea id="message" name="message" rows="3" placeholder=" " required data-cursor></textarea>
+            <label for="message">Message</label>
+            <small class="error" data-for="message"></small>
+          </div>
+          <button type="submit" class="btn btn--solid btn--block" data-magnetic data-cursor>Send Transmission</button>
+          <p class="form__success" id="formSuccess">Transmission sent — talk soon.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© <span id="year"></span> Saad Rahim</span>
+      <span>Designed in motion — HTML · CSS · JS</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

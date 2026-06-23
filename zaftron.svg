@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="ui-monospace, monospace">
+  <rect width="800" height="500" fill="#0b0b0e"/>
+  <g stroke="#fff" stroke-opacity="0.04">
+    <path d="M0 100H800M0 200H800M0 300H800M0 400H800"/>
+    <path d="M100 0V500M200 0V500M300 0V500M400 0V500M500 0V500M600 0V500M700 0V500"/>
+  </g>
+  <g fill="#fff" fill-opacity="0.035">
+    <path d="M-100 500 L200 -50 L260 -50 L-40 500 Z"/>
+    <path d="M40 500 L340 -50 L380 -50 L80 500 Z"/>
+  </g>
+  <text x="56" y="86" font-size="18" fill="#8a8a90" letter-spacing="5">[ 03 — LIVE DEMO ]</text>
+  <text x="52" y="170" font-family="Inter, system-ui, sans-serif" font-size="60" font-weight="800" fill="#ffffff" letter-spacing="-3">Zaftron</text>
+  <text x="52" y="234" font-family="Inter, system-ui, sans-serif" font-size="60" font-weight="800" fill="#ffffff" letter-spacing="-3" opacity="0.45">App</text>
+  <rect x="560" y="118" width="182" height="304" rx="26" fill="#0f0f13" stroke="#fff" stroke-opacity="0.18"/>
+  <circle cx="651" cy="196" r="34" fill="none" stroke="#fff" stroke-opacity="0.22" stroke-width="2"/>
+  <circle cx="651" cy="196" r="14" fill="#fff" fill-opacity="0.35"/>
+  <rect x="585" y="258" width="62" height="62" rx="8" fill="#fff" fill-opacity="0.12"/>
+  <rect x="655" y="258" width="62" height="62" rx="8" fill="#fff" fill-opacity="0.07"/>
+  <rect x="585" y="334" width="132" height="12" rx="6" fill="#fff" fill-opacity="0.12"/>
+  <rect x="585" y="356" width="96" height="12" rx="6" fill="#fff" fill-opacity="0.08"/>
+  <text x="56" y="452" font-size="14" fill="#5a5a62" letter-spacing="3">DEMO PREVIEW — REPLACE WITH REAL SCREENSHOT</text>
+</svg>
