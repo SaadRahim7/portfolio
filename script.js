@@ -21,6 +21,20 @@
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  /* ---------- back to top ---------- */
+  var toTop = document.getElementById('toTop');
+  if (toTop) {
+    var toggleToTop = function () {
+      if (window.pageYOffset > window.innerHeight * 0.6) toTop.classList.add('show');
+      else toTop.classList.remove('show');
+    };
+    window.addEventListener('scroll', toggleToTop, { passive: true });
+    toggleToTop();
+    toTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  }
+
   /* ============================================================
      NAV + progress + menu + active link
      ============================================================ */

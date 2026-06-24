@@ -297,6 +297,21 @@ html.is-loading, html.is-loading body { overflow: hidden; height: 100%; }
 .work-preview.show { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
 .work-preview::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 60px rgba(0,0,0,0.5); }
 
+/* back-to-top floating button */
+.to-top {
+  position: fixed; right: 26px; bottom: 26px; z-index: 70;
+  width: 50px; height: 50px; display: grid; place-items: center;
+  border: 1px solid rgba(255,255,255,0.18); border-radius: 50%;
+  background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  cursor: pointer; color: var(--text);
+  opacity: 0; transform: translateY(16px) scale(0.85); pointer-events: none;
+  transition: opacity 0.4s var(--ease), transform 0.5s var(--ease), background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.to-top.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+.to-top:hover { background: rgba(255,255,255,0.06); border-color: #fff; box-shadow: 0 0 26px rgba(255,255,255,0.14); }
+.to-top__arrow { width: 10px; height: 10px; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; transform: rotate(-45deg) translate(-1px, 1px); transition: transform 0.3s var(--ease); }
+.to-top:hover .to-top__arrow { transform: rotate(-45deg) translate(-1px, -2px); }
+
 /* ============================================================
    SKILLS — kinetic floating field
    ============================================================ */
