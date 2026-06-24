@@ -35,6 +35,140 @@
     });
   }
 
+  /* ---------- greeter robot → opens the game ---------- */
+  var bot = document.getElementById('bot');
+  if (bot) {
+    var botBtn = document.getElementById('botBtn');
+    setTimeout(function () { bot.classList.add('say'); }, 1000);   // show CTA bubble, keep it visible
+    botBtn.addEventListener('click', function () { if (typeof openHoops === 'function') openHoops(); });
+  }
+
+  /* ---------- basketball mini-game (Hoops) ---------- */
+  var openHoops = (function () {
+    var game = document.getElementById('game');
+    var canvas = document.getElementById('gCanvas');
+    if (!game || !canvas) return null;
+    var ctx = canvas.getContext('2d');
+    var scoreEl = document.getElementById('gScore');
+    var bestEl = document.getElementById('gBest');
+    var flash = document.getElementById('gFlash');
+
+    var W = 0, H = 0, dpr = 1;
+    var BALLR = 15, RIM = 34, G = 1300, K = 6.5, DRAGCAP = 200;
+    var ball, hoop, score = 0, best = 0, aiming = false, aim = { x: 0, y: 0 }, raf = null, last = 0, opened = false;
+
+    try { best = parseInt(localStorage.getItem('hoopsBest') || '0', 10) || 0; } catch (e) {}
+    if (bestEl) bestEl.textContent = best;
+
+    function size() {
+      var r = canvas.getBoundingClientRect();
+      W = r.width; H = r.height; dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function resetBall() { ball = { x: W / 2, y: H - 46, vx: 0, vy: 0, flying: false }; }
+    function placeHoop() { hoop = { x: W / 2, y: H * 0.30 }; }
+    function moveHoop() { hoop.x = W * (0.22 + Math.random() * 0.56); }
+    function evpos(e) { var r = canvas.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+
+    function onDown(e) { if (!ball || ball.flying) return; aiming = true; aim = evpos(e); try { canvas.setPointerCapture(e.pointerId); } catch (er) {} }
+    function onMove(e) { if (aiming) aim = evpos(e); }
+    function onUp() {
+      if (!aiming) return; aiming = false;
+      var dx = aim.x - ball.x, dy = aim.y - ball.y, d = Math.hypot(dx, dy);
+      if (d < 10) return;
+      var power = Math.min(d, DRAGCAP) * K;
+      ball.vx = (dx / d) * power; ball.vy = (dy / d) * power; ball.flying = true;
+    }
+
+    function scored() {
+      score++; if (scoreEl) scoreEl.textContent = score;
+      if (score > best) { best = score; if (bestEl) bestEl.textContent = best; try { localStorage.setItem('hoopsBest', String(best)); } catch (e) {} }
+      if (flash) { flash.textContent = 'SWISH! +1'; flash.classList.remove('show'); void flash.offsetWidth; flash.classList.add('show'); }
+      ball.flying = false;
+      setTimeout(function () { if (opened) { moveHoop(); resetBall(); } }, 480);
+    }
+
+    function step(ts) {
+      raf = requestAnimationFrame(step);
+      if (!last) last = ts;
+      var dt = Math.min((ts - last) / 1000, 0.032); last = ts;
+      if (ball && ball.flying) {
+        var prevY = ball.y;
+        ball.vy += G * dt;
+        ball.x += ball.vx * dt; ball.y += ball.vy * dt;
+        if (ball.vy > 0 && prevY < hoop.y && ball.y >= hoop.y && Math.abs(ball.x - hoop.x) < RIM - 6) scored();
+        if (ball.x < BALLR) { ball.x = BALLR; ball.vx *= -0.6; }
+        if (ball.x > W - BALLR) { ball.x = W - BALLR; ball.vx *= -0.6; }
+        if (ball.y > H + 70) resetBall();
+      }
+      draw();
+    }
+
+    function drawHoop() {
+      var x = hoop.x, y = hoop.y;
+      ctx.strokeStyle = 'rgba(255,255,255,0.5)'; ctx.lineWidth = 2.5;
+      ctx.strokeRect(x - 34, y - 64, 68, 44);
+      ctx.strokeRect(x - 12, y - 42, 24, 16);
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 3.5;
+      ctx.beginPath(); ctx.ellipse(x, y, RIM, 8, 0, 0, Math.PI * 2); ctx.stroke();
+      ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 1;
+      for (var i = -3; i <= 3; i++) { ctx.beginPath(); ctx.moveTo(x + (i / 3) * RIM, y); ctx.lineTo(x + (i / 3) * RIM * 0.4, y + 34); ctx.stroke(); }
+      ctx.beginPath(); ctx.moveTo(x - RIM * 0.66, y + 17); ctx.lineTo(x + RIM * 0.66, y + 17); ctx.stroke();
+    }
+    function drawBall() {
+      ctx.save(); ctx.translate(ball.x, ball.y);
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(0, 0, BALLR, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#0a0a0c'; ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.arc(0, 0, BALLR, 0, Math.PI * 2); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(-BALLR, 0); ctx.lineTo(BALLR, 0); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0, -BALLR); ctx.lineTo(0, BALLR); ctx.stroke();
+      ctx.beginPath(); ctx.arc(-BALLR, 0, BALLR, -0.6, 0.6); ctx.stroke();
+      ctx.beginPath(); ctx.arc(BALLR, 0, BALLR, Math.PI - 0.6, Math.PI + 0.6); ctx.stroke();
+      ctx.restore();
+    }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      drawHoop();
+      if (aiming && ball) {
+        ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.setLineDash([4, 6]); ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(ball.x, ball.y); ctx.lineTo(aim.x, aim.y); ctx.stroke(); ctx.setLineDash([]);
+        ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(aim.x, aim.y, 4, 0, Math.PI * 2); ctx.fill();
+      }
+      if (ball) drawBall();
+    }
+
+    canvas.addEventListener('pointerdown', onDown);
+    canvas.addEventListener('pointermove', onMove);
+    canvas.addEventListener('pointerup', onUp);
+    canvas.addEventListener('pointercancel', function () { aiming = false; });
+
+    function close() {
+      opened = false;
+      game.classList.remove('show'); document.body.style.overflow = '';
+      if (raf) cancelAnimationFrame(raf); raf = null;
+      setTimeout(function () { game.hidden = true; }, 350);
+    }
+    var gx = document.getElementById('gameX');
+    if (gx) gx.addEventListener('click', close);
+    game.addEventListener('click', function (e) { if (e.target === game) close(); });
+    document.addEventListener('keydown', function (e) { if (opened && e.key === 'Escape') close(); });
+    window.addEventListener('resize', function () { if (opened) { size(); placeHoop(); resetBall(); } });
+
+    return function open() {
+      if (opened) return;
+      opened = true;
+      game.hidden = false;
+      requestAnimationFrame(function () { game.classList.add('show'); });
+      document.body.style.overflow = 'hidden';
+      size(); placeHoop(); resetBall();
+      score = 0; if (scoreEl) scoreEl.textContent = '0';
+      last = 0;
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(step);
+    };
+  })();
+
   /* ============================================================
      NAV + progress + menu + active link
      ============================================================ */

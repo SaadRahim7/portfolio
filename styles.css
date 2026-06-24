@@ -312,6 +312,73 @@ html.is-loading, html.is-loading body { overflow: hidden; height: 100%; }
 .to-top__arrow { width: 10px; height: 10px; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; transform: rotate(-45deg) translate(-1px, 1px); transition: transform 0.3s var(--ease); }
 .to-top:hover .to-top__arrow { transform: rotate(-45deg) translate(-1px, -2px); }
 
+/* greeter robot (bottom-left) */
+.bot {
+  position: fixed; left: 22px; bottom: 22px; z-index: 90;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+  animation: botBob 3.6s ease-in-out infinite;
+}
+.bot__btn { width: 58px; height: 74px; padding: 0; background: none; border: none; cursor: pointer; filter: drop-shadow(0 6px 18px rgba(0,0,0,0.5)); transition: transform 0.35s var(--ease); }
+.bot__btn:hover { transform: scale(1.08) rotate(-2deg); }
+.bot__svg { width: 100%; height: 100%; display: block; }
+.bot__eyes { transform-box: view-box; transform-origin: 32px 30px; animation: botBlink 4.2s infinite; }
+.bot__arm { transform-box: view-box; transform-origin: 46px 55px; animation: botWave 2.6s var(--ease) infinite; }
+.bot__dot { transform-box: fill-box; transform-origin: center; animation: botPulse 1.8s ease-in-out infinite; }
+.bot__btn:hover .bot__arm { animation-duration: 0.8s; }
+
+.bot__bubble {
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.02em; line-height: 1.4; max-width: 168px;
+  background: #fff; color: #000; padding: 8px 12px; border-radius: 8px; position: relative; margin-left: 6px;
+  opacity: 0; transform: translateY(8px) scale(0.9); transform-origin: bottom left; pointer-events: none;
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+}
+.bot__bubble::after { content: ""; position: absolute; left: 14px; bottom: -5px; width: 10px; height: 10px; background: #fff; transform: rotate(45deg); border-radius: 2px; }
+.bot.say .bot__bubble { opacity: 1; transform: translateY(0) scale(1); }
+.bot__wave { display: inline-block; animation: botHand 1s var(--ease) infinite; }
+
+@keyframes botBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes botBlink { 0%, 91%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.12); } }
+@keyframes botWave { 0%, 58%, 100% { transform: rotate(0deg); } 68% { transform: rotate(20deg); } 78% { transform: rotate(-6deg); } 88% { transform: rotate(16deg); } }
+@keyframes botPulse { 0%, 100% { opacity: 0.45; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.25); } }
+@keyframes botHand { 0%, 100% { transform: rotate(0deg); } 30% { transform: rotate(18deg); } 60% { transform: rotate(-10deg); } }
+
+@media (max-width: 600px) {
+  .bot { left: 14px; bottom: 14px; }
+  .bot__btn { width: 46px; height: 60px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bot, .bot__eyes, .bot__arm, .bot__dot, .bot__wave { animation: none; }
+}
+
+/* basketball mini-game */
+.game {
+  position: fixed; inset: 0; z-index: 210; display: grid; place-items: center; padding: 18px;
+  background: rgba(0,0,0,0.66); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  opacity: 0; transition: opacity 0.3s var(--ease);
+}
+.game.show { opacity: 1; }
+.game[hidden] { display: none; }
+.game__win {
+  width: min(440px, 100%); max-height: 92vh; display: flex; flex-direction: column;
+  background: #0a0a0c; border: 1px solid rgba(255,255,255,0.16); border-radius: 10px; overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  transform: translateY(14px) scale(0.98); transition: transform 0.4s var(--ease);
+}
+.game.show .game__win { transform: none; }
+.game__bar { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--border-soft); }
+.game__title { font-family: var(--mono); font-size: 0.8rem; color: #fff; }
+.game__stats { margin-left: auto; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.game__stats b { color: #fff; font-variant-numeric: tabular-nums; }
+.game__sep { color: var(--faint); }
+.game__x { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted); border: 1px solid var(--border-soft); background: transparent; padding: 4px 9px; border-radius: 3px; cursor: pointer; text-transform: uppercase; transition: color 0.3s, border-color 0.3s; }
+.game__x:hover { color: #fff; border-color: #fff; }
+.game__stage { position: relative; }
+.game__canvas { display: block; width: 100%; height: 62vh; max-height: 540px; touch-action: none; cursor: crosshair; background: radial-gradient(120% 80% at 50% 0%, #141417 0%, #08080a 72%); }
+.game__flash { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--mono); font-size: 1.5rem; letter-spacing: 0.06em; color: #fff; opacity: 0; pointer-events: none; text-shadow: 0 2px 20px rgba(0,0,0,0.6); }
+.game__flash.show { animation: gFlash 0.85s var(--ease); }
+@keyframes gFlash { 0% { opacity: 0; transform: scale(0.6); } 28% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.12); } }
+.game__hint { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.04em; color: var(--muted); text-align: center; padding: 10px 12px; border-top: 1px solid var(--border-soft); }
+
 /* ============================================================
    SKILLS — kinetic floating field
    ============================================================ */
