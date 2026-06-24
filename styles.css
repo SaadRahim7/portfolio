@@ -245,7 +245,17 @@ html.is-loading, html.is-loading body { overflow: hidden; height: 100%; }
 
 .idx__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.6s var(--ease); }
 .idx.open .idx__panel { grid-template-rows: 1fr; }
-.idx__panelInner { overflow: hidden; }
+.idx__panelInner {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, 480px);
+  grid-template-areas: "desc media" "tech media" "link media";
+  align-items: start; column-gap: 36px;
+}
+.idx__desc { grid-area: desc; }
+.idx__tech { grid-area: tech; }
+.idx__link { grid-area: link; }
+.idx__media { grid-area: media; align-self: center; }
 .idx__desc { color: var(--muted); font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 300; max-width: 52ch; padding: 4px 8px 14px; }
 .idx__tech { display: flex; flex-wrap: wrap; gap: 22px; padding: 0 8px 24px; }
 .idx__tech span { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); }
@@ -268,7 +278,7 @@ html.is-loading, html.is-loading body { overflow: hidden; height: 100%; }
   border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
   background-image: var(--img, none), linear-gradient(135deg, #16161A, #070708);
   background-size: cover, cover; background-position: center, center; background-repeat: no-repeat;
-  filter: grayscale(1) contrast(1.04);
+  filter: contrast(1.04);
   transform: scale(0.98); opacity: 0; transition: transform 0.7s var(--ease) 0.1s, opacity 0.6s var(--ease) 0.1s;
 }
 .idx.open .idx__media { transform: scale(1); opacity: 1; }
@@ -279,7 +289,7 @@ html.is-loading, html.is-loading body { overflow: hidden; height: 100%; }
   pointer-events: none; border: 1px solid var(--border-soft); border-radius: 4px; overflow: hidden;
   background-image: var(--img, none), linear-gradient(135deg, #16161A, #070708);
   background-size: cover, cover; background-position: center, center; background-repeat: no-repeat;
-  filter: grayscale(1) contrast(1.05);
+  filter: contrast(1.05);
   opacity: 0; transform: translate(-50%, -50%) scale(0.82) rotate(-3deg);
   transition: opacity 0.45s var(--ease), transform 0.55s var(--ease);
   will-change: transform, opacity;
@@ -446,6 +456,11 @@ html.is-loading, html.is-loading body { overflow: hidden; height: 100%; }
   .idx__bar:hover .idx__title { transform: none; }   /* no shift on touch */
   .work-preview { display: none; }                   /* inline media used instead */
   .idx__desc { font-size: 1rem; }
+  .idx__panelInner {
+    grid-template-columns: 1fr;
+    grid-template-areas: "media" "desc" "tech" "link";
+    column-gap: 0;
+  }
 
   /* skills → static centered list */
   .field { height: auto; margin-top: 26px; }
