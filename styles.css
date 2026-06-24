@@ -364,6 +364,22 @@ html.is-loading, html.is-loading body { overflow: hidden; height: 100%; }
 /* ============================================================
    Footer
    ============================================================ */
+/* ============================================================
+   EDUCATION
+   ============================================================ */
+.edu .sec-label { margin-bottom: 48px; }
+.edu-list { border-top: 1px solid var(--border); }
+.edu-item {
+  display: grid; grid-template-columns: 170px 1fr; gap: 30px; align-items: baseline;
+  padding: 30px 4px; border-bottom: 1px solid var(--border);
+}
+.edu-yr { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.1em; color: var(--muted); }
+.edu-deg { font-size: clamp(1.2rem, 2.6vw, 1.6rem); font-weight: 600; letter-spacing: -0.02em; }
+.edu-org { color: var(--muted); margin-top: 5px; }
+
+/* ============================================================
+   Footer
+   ============================================================ */
 .footer { border-top: 1px solid var(--border-soft); padding: 40px 0; }
 .footer__inner { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--muted); font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; flex-wrap: wrap; }
 
@@ -441,6 +457,10 @@ html.is-loading, html.is-loading body { overflow: hidden; height: 100%; }
   .flow__node { left: -30px; width: 12px; height: 12px; }
   .flow__role { font-size: clamp(1.4rem, 6vw, 1.9rem); }
   .flow__items { gap: clamp(50px, 14vw, 90px); }
+
+  /* education */
+  .edu-item { grid-template-columns: 1fr; gap: 6px; padding: 24px 2px; }
+  .edu-yr { order: -1; }
 
   /* contact */
   .contact__grid { grid-template-columns: 1fr; gap: 44px; }
